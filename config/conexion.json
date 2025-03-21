@@ -1,0 +1,7 @@
+{
+    "host": "localhost",
+    "user": "root",
+    "password": "27979699",
+    "database": "crud2",
+    "charset": "utf8mb4"
+}

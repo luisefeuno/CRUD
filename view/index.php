@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<p>Prueba de funcionamiento</p>
 
 </body>
 
