@@ -12,7 +12,7 @@
             <div class="modal-body pd-25">
                 <h4 class="lh-3 mg-b-20" id="mdltitulo"><a href="" class="tx-inverse hover-primary">Mantenimiento de productos</a></h4>
                 <p class="mg-b-5">
-                <form id="formProducto">
+                <form id="formProducto" enctype="multipart/form-data">
                     <!-- id -->
                     <input type="hidden" name="prod_id" id="prod_id">
 
@@ -116,7 +116,30 @@
                             <div class="invalid-feedback small-invalid-feedback">Seleccione un país</div>
                         </div><!-- col-4 -->
                     </div><!-- col-9 -->
-            </div><!-- row -->
+
+
+                    <!-- imagen -->
+                    <div class="row no-gutters  mg-t-20">
+                        <div class="col-5 col-lg-3">
+                            <label for="prod_img" class="form-label">Imagen <span class="tx-danger">*</span></label>
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-9">
+                            <div class="custom-file d-flex">
+                                <input type="file" class="form-control" id="prod_img" name="prod_img" accept="image/*">
+                                <button type="button" id="btnLimpiarImagen" class="btn btn-outline-danger ms-2">
+                                    <i class="fa fa-times"></i> Quitar
+                                </button>
+                            </div>
+                            <div class="invalid-feedback small-invalid-feedback">Imagen con formato valido y menos de 2 MB</div>
+                            <div id="previewImagen" class="mt-2"></div>
+
+                        </div><!-- col-9 -->
+                    </div><!-- row -->
+
+
+
+            </div> <!-- modal-body -->
+
             </form>
 
             <div class="modal-footer">

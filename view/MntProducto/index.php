@@ -89,7 +89,7 @@
                 </div>
 
                 <!-- Botones de radio para filtrar -->
-                <div class="d-flex justify-content-start mb-3">
+                <div class="d-flex justify-content-start align-items-start mb-3">
                     <div class="radio-container" style="margin-left: 20px; border: 1px solid #ccc; padding: 5px; margin-left:70px;">
                         <div class="form-check form-check-inline">
                             <input class=" form-check-input" type="radio" name="filterStatus" id="filterAll" value="all" checked>
@@ -238,12 +238,10 @@
     <!--       mainJs.php        -->
     <!-- ----------------------- -->
     <?php include_once('../../config/template/mainJs.php') ?>
-
-    <script src="../../public/js/tooltip-colored.js"></script>
-    <script src="../../public/js/popover-colored.js"></script>
-    <!-- ------------------------- -->
+    <!------------------------------->
     <!--     END mainJs.php        -->
     <!-- ------------------------- -->
+
     <script type="text/javascript" src="mntproducto.js"></script>
 
 </body>

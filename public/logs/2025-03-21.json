@@ -1,58 +1,18 @@
 [
     {
-        "pantalla": "Productos",
-        "usuario": "admin",
-        "accion": "Consultar",
-        "mensaje": "Consultar todos los productos",
-        "fecha": "2025-03-21 12:39:46"
-    },
-    {
-        "pantalla": "Productos",
-        "usuario": "admin",
-        "accion": "Consultar",
-        "mensaje": "Consultar todos los productos",
-        "fecha": "2025-03-21 12:39:51"
-    },
-    {
-        "pantalla": "Productos",
-        "usuario": "admin",
-        "accion": "Consultar",
-        "mensaje": "Consultar todos los productos",
-        "fecha": "2025-03-21 12:40:07"
-    },
-    {
-        "pantalla": "Productos",
-        "usuario": "admin",
-        "accion": "Consultar",
-        "mensaje": "Consultar todos los productos",
-        "fecha": "2025-03-21 12:40:07"
-    },
-    {
-        "pantalla": "Productos",
-        "usuario": "admin",
-        "accion": "Consultar",
-        "mensaje": "Consultar todos los productos",
-        "fecha": "2025-03-21 12:40:09"
-    },
-    {
-        "usuario": "admin",
-        "pantalla": "Productos",
-        "actividad": "Eliminar",
-        "mensaje": "Se eliminó el producto con ID: 64",
-        "fecha_hora": "2025-03-21 13:20:36"
-    },
-    {
-        "usuario": "admin",
-        "pantalla": "Productos",
-        "actividad": "Eliminar",
-        "mensaje": "Se eliminó el producto con ID: 65",
-        "fecha_hora": "2025-03-21 13:22:42"
-    },
-    {
         "usuario": "admin",
         "pantalla": "Productos",
         "actividad": "Activar",
-        "mensaje": "Se activo el producto con ID: 65",
-        "fecha_hora": "2025-03-21 16:22:16"
+        "mensaje": "Se activo el producto con ID: 2",
+        "tipo": "error",
+        "fecha_hora": "2025-03-21 18:33:26"
+    },
+    {
+        "usuario": "admin",
+        "pantalla": "Productos",
+        "actividad": "Actualizar",
+        "mensaje": "Se actualizó el producto con ID: 64",
+        "tipo": "warning",
+        "fecha_hora": "2025-03-21 18:33:44"
     }
 ]

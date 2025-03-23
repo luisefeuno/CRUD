@@ -67,14 +67,14 @@
         <div class="br-pageheader">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="index.html">Dashboard</a>
-                <span class="breadcrumb-item active">Mantenimiento Productos</span>
+                <span class="breadcrumb-item active">Logs</span>
             </nav>
         </div><!-- br-pageheader -->
         <div class="br-pagetitle">
             <i class="icon icon ion-ios-bookmarks-outline"></i>
             <div>
-                <h4>Mantenimiento de productos</h4>
-                <p class="mg-b-0">Tabla básica para el mantenimiento de los productos</p>
+                <h4>Consulta de logs</h4>
+                <p class="mg-b-0">Consulta del sistema automático de control de LOGS</p>
             </div>
         </div><!-- d-flex -->
 
@@ -84,28 +84,27 @@
                 <p class="br-section-text">Searching, ordering and paging goodness will be immediately added to the
                     table, as
                     shown in this example.</p> -->
-                <div class="d-flex justify-content-end mb-3">
-                    <button class="btn btn-oblong btn-outline-primary mr-5" id="btnnuevo" style="width: 20%;">Nuevo</button>
-                </div>
 
                 <!-- Botones de radio para filtrar -->
-                <div class="d-flex justify-content-start mb-3">
+                <div class="d-flex justify-content-start align-items-start mb-3">
                     <div class="radio-container" style="margin-left: 20px; border: 1px solid #ccc; padding: 5px; margin-left:70px;">
                         <div class="form-check form-check-inline">
-                            <input class=" form-check-input" type="radio" name="filterStatus" id="filterAll" value="all" checked>
+                            <input class=" form-check-input" type="radio" name="filterStatus" id="filterInfo" value="info" checked>
+                            <label class="form-check-label" for="filterInfo">Info <i class="fa-solid fa-circle-info text-info tx-24"></i></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="filterStatus" id="filterError" value="error">
+                            <label class="form-check-label" for="filterError">Error <i class="fa-solid fa-circle-exclamation text-danger tx-24"></i></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="filterStatus" id="filterWarning" value="warning">
+                            <label class="form-check-label" for="filterWarning">Warning <i class="fa-solid fa-triangle-exclamation text-warning tx-24"></i></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="filterStatus" id="filterAll" value="all">
                             <label class="form-check-label" for="filterAll">Todos</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="filterStatus" id="filterActive" value="1">
-                            <label class="form-check-label" for="filterActive">Activado</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="filterStatus" id="filterInactive" value="0">
-                            <label class="form-check-label" for="filterInactive">Desactivado</label>
-                        </div>
-
                     </div>
-
 
                     <div class="col-7 col-lg-3">
                         <div class="input-group">
@@ -116,7 +115,10 @@
                             </div>
                             <input id="dateCreateFilter" type="text" class="form-control fc-datepicker" placeholder="dd-mm-aaaa" readonly>
                         </div><!-- input-group -->
-                        <div class="tx-8 tx-info" id="borrarFechaFiltro">Borrar fecha</div>
+                        <div class="d-flex justify-content-between">
+                            <div class="tx-10 tx-info" id="borrarFechaFiltro">Borrar fecha</div>
+                            <div class="tx-10 tx-info"> Introduzca la fecha </div>
+                        </div>
                     </div><!-- col-4 -->
 
                 </div>
@@ -128,24 +130,15 @@
                 </div>
 
                 <div class="table-wrapper" class="table, order-colum, hover, row-border, stripe responsive">
-                    <table id="productos_data" class="table display responsive nowrap">
+                    <table id="logs_data" class="table display responsive nowrap">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Id</th>
-                                <th>Descripción</th>
-                                <th>Creación</th>
-                                <th>Modificación</th>
-                                <th>Eliminación</th>
-                                <th>Estado</th>
-                                <th>Oferta</th>
-                                <th>Estado Producto</th>
-                                <th>id paises</th>
-                                <th>Descripción País</th>
-                                <th>Detalles</th>
-                                <th>Act./Desac.</th>
-                                <th>Edit.</th>
-
+                                <th>Usuario</th>
+                                <th>Pantalla</th>
+                                <th>Actividad</th>
+                                <th>Mensaje</th>
+                                <th class="text-center">Tipo</th>
+                                <th>Fecha/Hora</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -153,37 +146,13 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <!-- Botón de MAS -->
-                                <th><input type="text" placeholder="NO Buscar " class="d-none" /></th>
-                                <th><input type="text" placeholder="Buscar ID" class="d-none" /></th>
-                                <th><input type="text" placeholder="Buscar Descripción" /></th>
-                                <!-- A pesar de ser una fecha debemos colocarle tipo = text no funciona con fechas -->
-                                <th><input type="text" placeholder="dd-mm-yyyy hh:mm:ss" /></th>
-                                <!-- A pesar de ser una fecha debemos colocarle tipo = text no funciona con fechas -->
-                                <th><input type="text" placeholder="dd-mm-yyyy hh:mm:ss" /></th>
-                                <!-- A pesar de ser una fecha debemos colocarle tipo = text no funciona con fechas -->
-                                <th><input type="text" placeholder="dd-mm-yyyy hh:mm:ss" /></th>
-                                <!-- Estado Activo o inactivo -->
-                                <th><input type="text" placeholder="1=Act.,0 =Desac." /></th>
-
-                                <!-- oferta -->
-                                <th><input type="text" placeholder="NO BUSCAR" class="d-none" /></th>
-
-                                <!-- Estado producto -->
-                                <th><input type="text" placeholder="NO BUSCAR" class="d-none" /></th>
-
-                                <!-- id paises -->
-                                <th><input type="text" placeholder="NO BUSCAR" class="d-none" /></th>
-
-                                <!-- descr paises -->
-                                <th><input type="text" placeholder="NO BUSCAR" class="d-none" /></th>
-
-                                <!-- Boton de DETALLES -->
-                                <th><input type="text" placeholder="NO Buscar " class="d-none" /></th>
-                                <!-- Botón de ACTIVAR DESACTIVAR -->
-                                <th><input type="text" placeholder="NO Buscar " class="d-none" /></th>
-                                <!-- Botón de MODIFICAR -->
-                                <th><input type="text" placeholder="NO Buscar " class="d-none" /></th>
+                                <!-- USUARIO -->
+                                <th><input type="text" placeholder="Usuario " /></th>
+                                <th><input type="text" placeholder="Pantalla" /></th>
+                                <th><input type="text" placeholder="Actividad" /></th>
+                                <th><input type="text" placeholder="Mensaje" /></th>
+                                <th><input type="text" placeholder="info, error, warning" /></th>
+                                <th><input type="text" placeholder="Fecha-Hora" /></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -204,47 +173,17 @@
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
 
-    <!-- *********************************** -->
-    <!-- MODAL QUE SE DISPARA DESDE EL BOTON -->
-    <!--        DE LA PROPIA TABLA           -->
-    <!--        columDef                     -->
-    <!-- *********************************** -->
 
-    <?php include_once('detalleProductoBra.php') ?>
-
-    <!-- *********************************** -->
-    <!--                FIN                  -->
-    <!-- MODAL QUE SE DISPARA DESDE EL BOTON -->
-    <!--        DE LA PROPIA TABLA           -->
-    <!--             columDef                -->
-    <!-- *********************************** -->
-
-
-    <!-- *********************************** -->
-    <!-- MODAL QUE SE DISPARA DESDE EL BOTON -->
-    <!--             NUEVO                   -->
-    <!-- *********************************** -->
-
-    <?php include_once('mantenimientoProducto.php') ?>
-
-
-    <!-- *********************************** -->
-    <!--                FIN                  -->
-    <!-- MODAL QUE SE DISPARA DESDE EL BOTON -->
-    <!--               NUEVO                 -->
-    <!-- *********************************** -->
 
     <!-- ----------------------- -->
     <!--       mainJs.php        -->
     <!-- ----------------------- -->
     <?php include_once('../../config/template/mainJs.php') ?>
 
-    <script src="../../public/js/tooltip-colored.js"></script>
-    <script src="../../public/js/popover-colored.js"></script>
     <!-- ------------------------- -->
     <!--     END mainJs.php        -->
     <!-- ------------------------- -->
-    <script type="text/javascript" src="mntproducto.js"></script>
+    <script type="text/javascript" src="logs.js"></script>
 
 </body>
 

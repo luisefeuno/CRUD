@@ -379,9 +379,47 @@
             const value = input.value.trim();
             const parentDiv = input.closest('.col-7.col-sm-9');
 
+
+            ////////////////////
+            /// CAMPOS IMAGEN //
+            ////////////////////
+            //Validación para campos de tipo imagen
+            if (input.type === 'file' && config.required) {
+                if (input.files.length === 0) {
+                    input.classList.add('is-invalid');
+                    input.classList.remove('is-valid');
+                    return false;
+                } else {
+                    //Validar tipo de archivo
+                    const file = input.files[0];
+                    const fileName = file.name;
+                    const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+                    const allowedTypes = config.fileType; // Obtener los tipos de archivo permitidos desde la configuración
+                    const maxSizeKB = config.maxSize; // Obtener el tamaño máximo desde la configuración
+                    const fileSizeKB = file.size / 1024; // Tamaño del archivo en KB
+
+                    if (!allowedTypes.includes(fileExtension)) {
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+                        return false;
+                    } else if (fileSizeKB > maxSizeKB) {
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+                        return false;
+                    } else {
+                        input.classList.remove('is-invalid');
+                        input.classList.add('is-valid');
+                        return true;
+                    }
+                }
+            }
+
+
+            ////////////////////
+            /// CAMPOS SELECT //
+            ////////////////////
             // Solamente válidos para los campos select // Si es un select, es requerido y el valor es "0", se considera inválido
             // Si es un select, es requerido y el valor es "0", se considera inválido
-
             // Si es un select, es requerido y el valor es "0", se considera inválido
             if (input.tagName === 'SELECT' && config.required && value === '0') {
                 input.classList.add('is-invalid');
@@ -391,7 +429,6 @@
             } else {
                 input.classList.remove('is-invalid');
                 input.classList.add('is-valid');
-
             }
 
             // Si no es obligatorio y está vacío: válido
@@ -407,6 +444,7 @@
                 input.classList.remove('is-valid');
                 return false;
             }
+
 
             // Validar patrón regex
             /*value: Es el valor actual del campo de entrada, que se obtiene con input.value.
@@ -424,7 +462,6 @@
 
             input.classList.toggle('is-invalid', !isValid);
             input.classList.toggle('is-valid', isValid);
-
 
             return isValid;
         }

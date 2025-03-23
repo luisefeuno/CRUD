@@ -21,7 +21,7 @@ class RegistroActividad
    * @param string $actividad Acción realizada (listar, guardar, activar, desactivar, etc.).
    * @param string $mensaje Mensaje adicional sobre la actividad.
    */
-  public function registrarActividad($usuario, $pantalla, $actividad, $mensaje)
+  public function registrarActividad($usuario, $pantalla, $actividad, $mensaje, $tipo)
   {
     // Obtener la fecha actual para nombrar el archivo
     $fechaActual = date('Y-m-d');
@@ -38,8 +38,8 @@ class RegistroActividad
     $nuevaActividad = [
       'usuario' => $usuario,
       'pantalla' => $pantalla,
-      'actividad' => $actividad,
-      'mensaje' => $mensaje,
+      'actividad' => $actividad, /* Insertar, Actualizar, Desactivar, Activar     */'mensaje' => $mensaje,
+      'tipo' => $tipo,  //Tipo = error, warning, info, success
       'fecha_hora' => date('Y-m-d H:i:s') // Fecha y hora automática
     ];
 

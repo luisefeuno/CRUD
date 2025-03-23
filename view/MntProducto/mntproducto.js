@@ -51,15 +51,20 @@ $(document).ready(function () {
         },
         prod_email: {
             pattern: '^[\\w.-]+@[a-zA-Z\\d.-]+\\.[a-zA-Z]{2,}$',
-            required: true
+            required: false
         },
         prod_telefono: {
             pattern: '^(\\+?\\d{1,3}[ ]?)?\\d{9,10}$',
-            required: true
+            required: false
         },
         // Para los select, si son requiered, se omite el valor 0 (es lo que se chequea)
         paises_sel_id: {
             required: true
+        },
+        prod_img: {
+            required: true,
+            fileType: ['jpg', 'jpeg', 'png'], // Tipos de archivo permitidos
+            maxSize: 2048 // Tamaño máximo en KB (2MB)
         }
     });
 
@@ -77,13 +82,9 @@ $(document).ready(function () {
     });
 
     // Para que se mantenga dentro del modal
-    // op-2
-
-
     $('#paises_sel_id').select2({
         dropdownParent: $('#modalMantenimiento')
     });
-
     // Para el resto se ha colocado un CSS en el mainHead
 
     /////////////////////////////////////////
@@ -175,7 +176,7 @@ $(document).ready(function () {
                 targets: 6, width: '10%', orderable: true, searchable: true, className: "text-center",
                 render: function (data, type, row) {
                     if (type === "display") {
-                        return data == 1 ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>';
+                        return data == 1 ? '<i class="bi bi-check-circle text-success tx-24"></i>' : '<i class="bi bi-x-circle text-danger tx-24"></i>';
                     }
                     return data;
                 }
@@ -301,9 +302,9 @@ $(document).ready(function () {
     //   INICIO ZONA FUNCIONES DE APOYO      //
     //////////////////////////////////////////
 
+
     // Carga los datos de los países en el select2.
     // @param { string } selectId - ID del elemento select2.
-
     //////////////////////////////////////
     // Funcion para cargar un select    //
     ///////////////////////////// ///////
@@ -356,6 +357,10 @@ $(document).ready(function () {
         var Estado = $("input[name='estado']:checked").val();
         var Pais = $('#paises_sel_id').val();
 
+        var prodImg = $('#prod_img')[0].files[0]; // Obtener el archivo de imagen
+
+
+
         //        var paisesId = $('#formProducto').find('input[name="paisesId"]').val();
 
         //        console.log('Valor de prod_nom:', prodNom);
@@ -392,7 +397,8 @@ $(document).ready(function () {
             prod_nom: prodNom,
             oferta: Oferta,
             estadoProducto: Estado,
-            paisesId: Pais
+            paisesId: Pais,
+            prod_img: prodImg
         };
 
         //console.log(datosFormulario);
@@ -429,7 +435,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 swal.fire(
                     'Error',
-                    'No se pudo guardar el producto',
+                    'No se pudo guardar el producto. ' + error + '. Respuesta del servidor: ' + xhr.responseText,
                     'error'
                 );
             } // del error
@@ -695,6 +701,44 @@ $(document).ready(function () {
     //   FIN ZONA ACTIVAR PRODUCTO    //
     //////////////////////////////////
 
+    ////////////////////////////////////
+    //   TRATAMIENTO DE LA IMAGEN    //
+    //////////////////////////////////
+
+    // Función para mostrar la previsualización de la imagen
+    $("#prod_img").change(function () {
+        mostrarPreview(this);
+    });
+
+    // Función para limpiar la imagen seleccionada
+    $("#btnLimpiarImagen").click(function () {
+        limpiarInputImagen();
+    });
+
+
+    // Función para mostrar la previsualización de la imagen
+    function mostrarPreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#previewImagen").html('<img src="' + e.target.result + '" alt="Vista previa" class="img-fluid" style="max-height: 200px;" />');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Función para limpiar el input de imagen
+    function limpiarInputImagen() {
+        // Limpiar el valor del input file
+        $("#prod_img").val("");
+        // Limpiar la previsualización
+        $("#previewImagen").empty();
+    }
+    ////////////////////////////////////
+    //               FIN             //
+    //   TRATAMIENTO DE LA IMAGEN    //
+    //////////////////////////////////
+
 
 
     ///////////////////////////////////////
@@ -716,7 +760,9 @@ $(document).ready(function () {
 
         // Vamos a cargar el select2 con los datos de los países
         cargarPaisesEnSelect2('#paises_sel_id');
-
+        // Limpiar la imagen por si se ha seleccionado una anteriormente
+        // La función se ha definido en la parte inferior de este documento
+        limpiarInputImagen();
 
         // Mostrar el mantenimiento(modal) con el foco en el primer campo
         $('#modalMantenimiento').on('shown.bs.modal', function () {
@@ -781,6 +827,10 @@ $(document).ready(function () {
                 // Vamos a cargar el select2 con los datos de los países
                 cargarPaisesEnSelect2('#paises_sel_id', data.paisesId);
                 // Esperar a que Select2 se inicialice y las opciones se carguen
+
+                // debemos cargar el campo de texto de la imagen desde la otra tabla
+
+
 
             } else {
                 console.error('Error: Datos no encontrados');
@@ -959,3 +1009,5 @@ $(document).ready(function () {
     //  FIN ZONA FILTROS PIES y SEARCH     //
     ///////////////////////////////////////////
 }); // de document.ready
+
+

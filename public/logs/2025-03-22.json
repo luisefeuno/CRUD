@@ -1,0 +1,10 @@
+[
+    {
+        "usuario": "admin",
+        "pantalla": "Productos",
+        "actividad": "Desactivar",
+        "mensaje": "Se desactivó el producto con ID: 2",
+        "tipo": "info",
+        "fecha_hora": "2025-03-22 10:01:10"
+    }
+]

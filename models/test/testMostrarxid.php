@@ -4,12 +4,12 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once 'Productos.php';
+require_once 'Paises.php';
 
-$productos = new Productos();
-$producto = $productos->get_producto();
+$paises = new Paises();
+$pais = $paises->get_pais();
 
-if ($producto !== false) {
+if ($pais !== false) {
     // Primera forma de mostrar los usuarios
     /*    foreach ($usuarios as $usuario) {
         echo "ID: " . $usuario['id'] . "<br>";
@@ -21,16 +21,16 @@ if ($producto !== false) {
 
     // Segunda forma de mostrar los usuarios
     print_r('<pre>');
-    print_r($producto);
+    print_r($pais);
     print_r('</pre>');
 } else {
-    echo "Error al mostrar el producto";
+    echo "Error al mostrar el pais";
 }
 
 
-$producto = $productos->get_productoxid(3);
+$pais = $paises->get_paisxid(3);
 
-if ($producto !== false) {
+if ($pais !== false) {
     // Primera forma de mostrar los usuarios
     /*    foreach ($usuarios as $usuario) {
         echo "ID: " . $usuario['id'] . "<br>";
@@ -42,8 +42,8 @@ if ($producto !== false) {
 
     // Segunda forma de mostrar los usuarios
     print_r('<pre>');
-    print_r($producto);
+    print_r($pais);
     print_r('</pre>');
 } else {
-    echo "Error al mostrar el producto";
+    echo "Error al mostrar el pais";
 }
